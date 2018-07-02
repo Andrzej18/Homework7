@@ -1,0 +1,30 @@
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.function.Predicate;
+
+public class Tasks {
+    private final List<Task> tasks = new ArrayList<>();
+
+    public void add(Task task) {
+        tasks.add(task);
+    }
+    public void sort(Comparator<Task> comparator) {
+        tasks.sort(comparator);
+    }
+    public Tasks filter(Predicate<Task> predicate) {
+        Tasks filter2 = new Tasks();
+
+        for (Task task : tasks) {
+            if (predicate.test(task))
+                filter2.add(task);
+        }
+
+        return filter2;
+    }
+
+    @Override
+    public String toString() {
+        return "Tasks:\n" + tasks + "\n";
+    }
+}
