@@ -1,0 +1,22 @@
+import java.time.LocalDateTime;
+
+public class TasksRunner {
+    public static void main(String[] args) {
+        Tasks tasks = new Tasks();
+        tasks.add(new Task(1, "Laptop", "Google and work", LocalDateTime.parse("2018-04-11T10:00:00"), Priority.MAJOR));
+        tasks.add(new Task(2, "Bank", "Money", LocalDateTime.parse("2018-04-11T10:00:00"), Priority.MINOR));
+        tasks.add(new Task(3, "Sport", "Play football", LocalDateTime.parse("2018-04-11T10:00:00"), Priority.NORMAL));
+        tasks.sort(TaskComparator.byName());
+        System.out.println("By Name:"+tasks);
+
+        tasks.sort(TaskComparator.byDeadline());
+        System.out.println("By Deadline:"+tasks);
+
+        tasks.sort(TaskComparator.byPriority());
+        System.out.println("By Priority:\n"+tasks);
+
+        System.out.println("Expired Deadline:"+tasks.filter(TaskPredicates.hasExpiredDeadline()));
+        System.out.println("Priority MAJOR:"+tasks.filter(TaskPredicates.hasPriority(Priority.MAJOR)));
+        System.out.println("Name Contains \'Sport\':"+tasks.filter(TaskPredicates.nameContains("Sport")));
+    }
+}
